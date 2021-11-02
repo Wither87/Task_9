@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<form action="/list/new" method="GET">
+    <input type="submit" value="Добавить новый"/>
+</form>
+
+<table>
+    <thead>
+    <tr>
+        <th> № </th>
+        <th> Список покупок </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${list.empty}">
+        <td colspan="2"> Список пуст </td>
+    </tr>
+    <tr th:each="item : ${list}">
+        <td><span th:text="${item.getId()}"> Номер в списке </span></td>
+        <td><span th:text="${item.getText()}"> Продукт </span></td>
+        <td th:switch="${item.getIsBought()}">
+            <span th:case="${true}"> Куплен </span>
+            <span th:case="${false}"> Не куплен </span>
+        </td>
+        <td>
+            <form th:action="${'/list/'+item.getId()+'/buy'}" th:method="post">
+                <input type="submit" value="Купить">
+            </form>
+        </td>
+        <td>
+            <form th:action="${'/list/'+item.getId()}" th:method="get">
+                <input type="submit" value="Открыть">
+            </form>
+        </td>
+        <td>
+            <form th:action="${'/list/'+item.getId()}" th:method="post">
+                <input type="submit" value="Удалить">
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
