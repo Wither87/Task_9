@@ -28,8 +28,9 @@
             <span th:case="${false}"> Не куплен </span>
         </td>
         <td>
-            <form th:action="${'/list/'+item.getId()+'/buy'}" th:method="post">
-                <input type="submit" value="Купить">
+            <form th:action="${'/list/'+item.getId()+'/buy'}" th:method="post" th:switch="${item.getIsBought()}">
+                <input th:case="${false}" type="submit" value="Купить">
+                <input th:case="${true}" type="submit" value="Отменить покупку">
             </form>
         </td>
         <td>
@@ -38,7 +39,7 @@
             </form>
         </td>
         <td>
-            <form th:action="${'/list/'+item.getId()}" th:method="post">
+            <form th:action="${'/list/'+item.getId()+'/delete'}" th:method="post">
                 <input type="submit" value="Удалить">
             </form>
         </td>

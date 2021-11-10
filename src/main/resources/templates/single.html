@@ -8,7 +8,8 @@
     <h1>Просмотр покупки</h1>
     <hr/>
     <form th:action="${'/list/'+item.getId()+'/update'}" th:method="post">
-        <input type="text" name="text" th:text="${item.getText()}">
+        <span th:text="${item.getText()}"></span>
+        <input type="text" name="text">
         <input type="submit" value="Изменить" >
         <button onclick="location.href='/list'" type="button">Назад к списку</button>
     </form>
